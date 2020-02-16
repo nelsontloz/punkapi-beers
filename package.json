@@ -1,5 +1,5 @@
 {
-  "name": "overstock",
+  "name": "punkapi-beers",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
