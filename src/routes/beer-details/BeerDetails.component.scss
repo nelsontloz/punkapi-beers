@@ -1,14 +1,15 @@
-.beer-card {
+.beer-details {
+  .beer-header {
+    display: flex;
+  }
   .image {
     width: auto;
-    height: 96px;
+    height: 9rem;
+    margin: 0 2rem;
     img {
       margin: auto;
       width: auto;
       height: 100%;
     }
-  }
-  .favorite {
-    cursor: pointer;
   }
 }

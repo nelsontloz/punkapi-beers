@@ -20,8 +20,8 @@ function Navbar() {
             alt="bulma"
           />
         </Link>
-        <button
-          className="button navbar-burger burger"
+        <a
+          className="navbar-burger burger"
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
@@ -30,7 +30,7 @@ function Navbar() {
           <span aria-hidden="true" />
           <span aria-hidden="true" />
           <span aria-hidden="true" />
-        </button>
+        </a>
       </div>
       <div
         id="navbarBasicExample"
