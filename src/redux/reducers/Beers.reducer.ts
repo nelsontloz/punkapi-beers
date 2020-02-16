@@ -1,8 +1,8 @@
-import { Beer } from '../../services/Beers.service';
-
 export const SELECT_BEER = 'beers/selectBeer';
 export const ADD_FAVORITE_BEER = 'beers/addFavoriteBeer';
 export const REMOVE_FAVORITE_BEER = 'beers/removeFavoriteBeer';
+export const NEXT_PAGE = 'beers/nextPage';
+export const PREVIOUS_PAGE = 'beers/previousPage';
 
 export function selectBeer(beer: string | null) {
   return {
@@ -25,16 +25,28 @@ export function removeFavoriteBeer(id: string | null) {
   };
 }
 
+export function nextPage() {
+  return {
+    type: NEXT_PAGE,
+  };
+}
+
+export function previousPage() {
+  return {
+    type: PREVIOUS_PAGE,
+  };
+}
+
 export type BeersState = {
   selectedBeer: string | null;
-  beers: Beer[];
   favoriteBeers: string[];
+  page: number;
 };
 
 const initialState: BeersState = {
   selectedBeer: null,
-  beers: [],
   favoriteBeers: [],
+  page: 1,
 };
 
 function beersReducer(state: any, action: any) {
@@ -60,6 +72,13 @@ function beersReducer(state: any, action: any) {
             return action.id !== beerId;
           }),
         ],
+      };
+    case NEXT_PAGE:
+      return { ...state, page: ++state.page };
+    case PREVIOUS_PAGE:
+      return {
+        ...state,
+        page: state.page <= 1 ? 1 : --state.page,
       };
     default:
       return state;

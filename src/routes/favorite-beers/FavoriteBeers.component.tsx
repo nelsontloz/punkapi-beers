@@ -3,14 +3,18 @@ import store from '../../redux/Store';
 import { BeersState } from '../../redux/reducers/Beers.reducer';
 import { getBeers } from '../../services/Beers.service';
 import BeersList from '../../components/BeersList/BeersList.component';
+import Loader from '../../components/loader/Loader.component';
 
 function FavoriteBeers() {
   const [beers, setBeers] = useState([]);
-  const state: BeersState = store.getState();
+  const [isLoading, setIsLoading] = useState(true);
+  let state: BeersState = store.getState();
+
   useEffect(() => {
     const subscription = getBeers({ ids: state.favoriteBeers }).subscribe(
       (response) => {
         setBeers(response.data);
+        setIsLoading(false);
       }
     );
     return () => {
@@ -20,7 +24,7 @@ function FavoriteBeers() {
 
   return (
     <div className="container">
-      <BeersList beers={beers}></BeersList>
+      {isLoading ? <Loader></Loader> : <BeersList beers={beers}></BeersList>}
     </div>
   );
 }
