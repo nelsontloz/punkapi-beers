@@ -9,7 +9,7 @@ import FavoriteBeers from './routes/favorite-beers/FavoriteBeers.component';
 function App() {
   return (
     <div className="App ">
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <Navbar></Navbar>
         <Route exact path="/" component={Home} />
         <Route exact path="/favorite-beers" component={FavoriteBeers} />
