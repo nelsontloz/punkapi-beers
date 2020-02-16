@@ -7,7 +7,7 @@ function Navbar() {
   };
   return (
     <nav
-      className="navbar is-fixed-top"
+      className="navbar is-fixed-top is-light"
       role="navigation"
       aria-label="main navigation"
     >

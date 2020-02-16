@@ -1,16 +1,8 @@
 import { Beer } from '../../services/Beers.service';
 
-export const UPDATE_BEERS = 'beers/updateBeers';
 export const SELECT_BEER = 'beers/selectBeer';
 export const ADD_FAVORITE_BEER = 'beers/addFavoriteBeer';
 export const REMOVE_FAVORITE_BEER = 'beers/removeFavoriteBeer';
-
-export function updateBeers(beers: Beer[]) {
-  return {
-    type: UPDATE_BEERS,
-    beers,
-  };
-}
 
 export function selectBeer(beer: string | null) {
   return {
@@ -50,11 +42,6 @@ function beersReducer(state: any, action: any) {
     return initialState;
   }
   switch (action.type) {
-    case UPDATE_BEERS:
-      return {
-        ...state,
-        beers: [...action.beers],
-      };
     case SELECT_BEER:
       return {
         ...state,
