@@ -3,15 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartReg } from '@fortawesome/free-regular-svg-icons';
 import './BeerCard.scss';
+import { Link } from 'react-router-dom';
 
 type BeerCardProps = {
+  id: string;
   name: string;
   tagline: string;
   image_url: string;
   isFavorite?: boolean;
+  linkUrl: string;
   onAddToFavorite?: () => void;
   onRemomveToFavorite?: () => void;
-  onSelectBeer?: () => void;
 };
 
 function BeerCard(props: BeerCardProps) {
@@ -20,12 +22,22 @@ function BeerCard(props: BeerCardProps) {
       <div className="card-content">
         <div className="media">
           <div className="media-left">
-            <figure className="image" onClick={props.onSelectBeer}>
+            <figure className="image">
               <img src={props.image_url} alt={props.name}></img>
             </figure>
           </div>
-          <div className="media-content" onClick={props.onSelectBeer}>
-            <p className="title is-4">{props.name}</p>
+          <div className="media-content">
+            <p className="title is-4">
+              <Link
+                to={{
+                  pathname: props.linkUrl,
+                  search: `?id=${props.id}`,
+                }}
+              >
+                {' '}
+                {props.name}
+              </Link>
+            </p>
             <p className="subtitle is-6">{props.tagline}</p>
           </div>
           <div className="favorite has-text-danger">

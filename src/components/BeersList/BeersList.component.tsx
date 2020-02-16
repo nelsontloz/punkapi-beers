@@ -14,7 +14,7 @@ function BeersList(props: BeerListProps) {
             className="column is-6-tablet is-4-desktop"
             key={`beer-${index}`}
           >
-            <BeerCardRedux {...beer}></BeerCardRedux>
+            <BeerCardRedux {...beer} linkUrl={'/beer-details'}></BeerCardRedux>
           </div>
         );
       })}

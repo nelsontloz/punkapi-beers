@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import store from '../../redux/Store';
-import { BeersState, updateBeers } from '../../redux/reducers/Beers.reducer';
+import { BeersState } from '../../redux/reducers/Beers.reducer';
 import { getBeers } from '../../services/Beers.service';
-import BeersListRedux from '../../components/BeersList/BeersList.component.redux';
+import BeersList from '../../components/BeersList/BeersList.component';
 
 function FavoriteBeers() {
+  const [beers, setBeers] = useState([]);
   const state: BeersState = store.getState();
-  getBeers({ ids: state.favoriteBeers }).then((response) => {
-    store.dispatch(updateBeers(response.data));
-  });
+  useEffect(() => {
+    const subscription = getBeers({ ids: state.favoriteBeers }).subscribe(
+      (response) => {
+        setBeers(response.data);
+      }
+    );
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [state.favoriteBeers]);
 
-  return <div className="container">
-      <BeersListRedux></BeersListRedux>
-  </div>;
+  return (
+    <div className="container">
+      <BeersList beers={beers}></BeersList>
+    </div>
+  );
 }
 
 export default FavoriteBeers;

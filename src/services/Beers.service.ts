@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from 'axios-observable';
 
 export interface Volume {
   value: number;
@@ -123,7 +123,7 @@ export function getBeers(filters?: BeerFilters, pagination?: BeerPagination) {
   if (filters && filters.ids) {
     ids = formatIds(filters?.ids || []);
   }
-  return axios.get(`${process.env.REACT_APP_API_URL}/beers`, {
+  return Axios.get(`${process.env.REACT_APP_API_URL}/beers`, {
     params: { ...filters, ...pagination, ids },
   });
 }

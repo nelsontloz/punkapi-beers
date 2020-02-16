@@ -12,10 +12,10 @@ export function updateBeers(beers: Beer[]) {
   };
 }
 
-export function selectBeer(id: string | null) {
+export function selectBeer(beer: string | null) {
   return {
     type: SELECT_BEER,
-    id,
+    id: beer,
   };
 }
 

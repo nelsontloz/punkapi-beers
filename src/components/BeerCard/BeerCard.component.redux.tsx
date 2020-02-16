@@ -1,5 +1,4 @@
 import {
-  selectBeer,
   removeFavoriteBeer,
   addFavoriteBeer,
   BeersState,
@@ -21,9 +20,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
     },
     onRemomveToFavorite: () => {
       dispatch(removeFavoriteBeer(ownProps.id));
-    },
-    onSelectBeer: () => {
-      dispatch(selectBeer(ownProps.id));
     },
   };
 };

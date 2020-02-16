@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { getBeers } from '../../services/Beers.service';
 import { AxiosResponse } from 'axios';
-import BeersListRedux from '../../components/BeersList/BeersList.component.redux';
-import store from '../../redux/Store';
-import { updateBeers } from '../../redux/reducers/Beers.reducer';
+import BeersList from '../../components/BeersList/BeersList.component';
 
 function Home() {
-  getBeers({}, { per_page: 30, page: 1 }).then((response: AxiosResponse) => {
-    store.dispatch(updateBeers(response.data));
-  });
+  const [beers, setBeers] = useState([]);
+  useEffect(() => {
+    const subscription = getBeers({}, { per_page: 30, page: 1 }).subscribe(
+      (response: AxiosResponse) => {
+        setBeers(response.data);
+      }
+    );
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   return (
     <div className="container">
       <div className="columns is-multiline">
-        <BeersListRedux></BeersListRedux>
+        <BeersList beers={beers}></BeersList>
       </div>
     </div>
   );
