@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import store from '../../redux/Store';
-import { BeersState } from '../../redux/reducers/Beers.reducer';
 import { getBeers } from '../../services/Beers.service';
 import BeersList from '../../components/BeersList/BeersList.component';
 import Loader from '../../components/loader/Loader.component';
+import { connect } from 'react-redux';
 
-function FavoriteBeers() {
+function FavoriteBeers(props: { favoriteBeers: string[] }) {
   const [beers, setBeers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  let state: BeersState = store.getState();
 
   useEffect(() => {
-    const subscription = getBeers({ ids: state.favoriteBeers }).subscribe(
+    const subscription = getBeers({ ids: props.favoriteBeers }).subscribe(
       (response) => {
         setBeers(response.data);
         setIsLoading(false);
@@ -20,13 +18,27 @@ function FavoriteBeers() {
     return () => {
       subscription.unsubscribe();
     };
-  }, [state.favoriteBeers]);
+  }, [props.favoriteBeers]);
 
   return (
     <div className="container">
-      {isLoading ? <Loader></Loader> : <BeersList beers={beers}></BeersList>}
+      {props.favoriteBeers.length === 0 ? (
+        <div className="content has-text-centered">
+          <h2>No favorite beers selected!</h2>
+        </div>
+      ) : isLoading ? (
+        <Loader></Loader>
+      ) : (
+        <BeersList beers={beers}></BeersList>
+      )}
     </div>
   );
 }
 
-export default FavoriteBeers;
+const mapStateToProps = (state: any) => {
+  return {
+    favoriteBeers: state.favoriteBeers,
+  };
+};
+
+export default connect(mapStateToProps)(FavoriteBeers);

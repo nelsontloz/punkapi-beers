@@ -30,7 +30,7 @@ function PaginationNav(props: PaginationNavProps) {
         <span className="icon">
           <FontAwesomeIcon icon={faChevronLeft}></FontAwesomeIcon>
         </span>
-        <span>Prev page</span>
+        <span>Previous page</span>
       </button>
       <button className="button pagination-next" onClick={props.onNextPage}>
         <span>Next page</span>

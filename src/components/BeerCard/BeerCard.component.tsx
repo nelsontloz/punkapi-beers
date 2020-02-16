@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartReg } from '@fortawesome/free-regular-svg-icons';
-import './BeerCard.scss';
+import './BeerCard.component.scss';
 import { Link } from 'react-router-dom';
 
 type BeerCardProps = {
