@@ -1,5 +1,6 @@
 .beer-card {
   .image {
+    cursor: pointer;
     width: 48px;
     height: 96px;
     img {
@@ -7,5 +8,11 @@
       width: auto;
       height: 100%;
     }
+  }
+  .media-content {
+    cursor: pointer;
+  }
+  .favorite {
+    cursor: pointer;
   }
 }

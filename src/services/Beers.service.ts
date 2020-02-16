@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from 'axios';
 
 export interface Volume {
   value: number;
@@ -106,10 +106,13 @@ type BeerFilters = {
 
 type BeerPagination = {
   page?: number;
-  perPage?: number;
+  per_page?: number;
 };
 
 function formatIds(ids: string[]) {
+  if (ids.length === 0) {
+    return '';
+  }
   return ids.reduce((prev, curr) => {
     return `${prev}|${curr}`;
   });

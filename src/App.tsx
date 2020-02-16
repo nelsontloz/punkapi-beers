@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from "react";
-import "./App.scss";
-import { getBeers, Beer } from "./services/Beers.service";
-import { AxiosResponse } from "axios";
-import BeerCard from "./components/BeerCard/BeerCard.component";
+import React from 'react';
+import './App.scss';
+import { HashRouter, Route } from 'react-router-dom';
+import Home from './routes/home/Home.component';
+import BeerDetails from './routes/beer-details/BeerDetails.component';
+import Navbar from './components/Navbar/Navbar.component';
+import FavoriteBeers from './routes/favorite-beers/FavoriteBeers.component';
 
 function App() {
-  const [beers, setBeers] = useState([]);
-  useEffect(() => {
-    getBeers().then((response: AxiosResponse) => {
-      setBeers(response.data);
-    });
-  }, []);
-
   return (
-    <div className="App container">
-      <div className="columns is-multiline">
-        {beers.map((beer: Beer, index) => {
-          return (
-            <div
-              className="column is-6-tablet is-4-desktop"
-              key={`beer-${index}`}
-            >
-             <BeerCard {...beer}></BeerCard>
-            </div>
-          );
-        })}
-      </div>
+    <div className="App ">
+      <HashRouter>
+        <Navbar></Navbar>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/favorite-beers" component={FavoriteBeers} />
+        <Route exact path="/beer-details" component={BeerDetails} />
+      </HashRouter>
     </div>
   );
 }
